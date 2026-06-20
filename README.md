@@ -132,10 +132,11 @@ before the disturbance.
 This work is built on the **Sienna** modeling ecosystem and would not be possible without it. Please cite **PowerSimulationsDynamics.jl** (Lara et al., 2023) when using this repository.
 
 If any part of this project or its power-system test cases is useful for your study, please also cite this repository as:
-
 Damola Ajeyemi, *PowerSimulationsDynamics.jl-Based Balanced dq0 EMT Simulations for Transient and Small-Signal Stability Studies of IEEE 39-Bus and 3-Bus Test Systems*, Zenodo, 2026. DOI: `10.5281/zenodo.20779024`.
-
 Link: https://zenodo.org/records/20779024
+
+You may also use the **“Cite this repository”** button on GitHub or the **Zenodo DOI** to cite this project.
+
 
 
 
