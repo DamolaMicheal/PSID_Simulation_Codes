@@ -6,7 +6,7 @@ case), built on the open-source **Sienna / PowerSimulationsDynamics.jl**
 toolbox.
 
 
-> **Note** This repository does **not** reimplement a simulation engine. It *uses*
+> **Note:** This repository does **not** reimplement a simulation engine. It *uses*
 > the `PowerSimulationsDynamics.jl` (`PSID.jl`) modeling and simulation toolbox,
 > developed by the NREL Sienna team, to build and study specific IEEE 39-bus and
 > 3-bus power-system test cases. Credit for the underlying toolbox used for this project belongs to the
@@ -101,7 +101,7 @@ Outputs are written to `3bus_TestCase/3bus_plots/`.
 Disturbance type, bus partitions, and fault location are set via
 the constants near the top of each `*_main_run.jl` file.
 
-## Dynamic power-system simulation code  (IEEE 39-bus and 3-bus)
+## Power-system simulation code  (IEEE 39-bus and 3-bus test case)
 
 This Julia code builds and simulates Balance dq0 EMT power-system models using
 `PowerSystems.jl`, `PowerSimulationsDynamics.jl`, `PowerFlows.jl`, and
@@ -131,4 +131,5 @@ before the disturbance.
 
 This work is built on the **Sienna** modeling ecosystem and would not be possible
 without it. Please cite **PowerSimulationsDynamics.jl** (Lara et al., 2023, above)
-when using this repository. To cite this repository itself, use the “Cite this repository” button on GitHub, generated from CITATION.cff, or use its Zenodo DOI once a release has been archived.
+when using this repository. If any part of this project or its power-system test cases is useful for your study, you may also cite this repository using the “Cite this repository” button on GitHub, 
+generated from CITATION.cff, or use its Zenodo DOI once a release has been archived.
