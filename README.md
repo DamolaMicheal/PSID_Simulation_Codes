@@ -5,12 +5,17 @@ Balanced dq0 EMT (electromagnetic-transient) simulation and Small Signal Stabili
 case), built on the open-source **Sienna / PowerSimulationsDynamics.jl**
 toolbox.
 
-> **Note** This repository does **not** reimplement a simulation
-> engine. It *uses* the PowerSimulationsDynamics.jl (PSID.jl) modeling and
-> simulation toolbox developed by the NREL Sienna team to build and study
-> specific IEEE 39-bus and 3-bus cases. Credit for the underlying Toolbox used to
-> develop these test cases belongs to the PSID.JL developers (see
-> **Citing** below).
+
+> **Note** This repository does **not** reimplement a simulation engine. It *uses*
+> the `PowerSimulationsDynamics.jl` (`PSID.jl`) modeling and simulation toolbox,
+> developed by the NREL Sienna team, to build and study specific IEEE 39-bus and
+> 3-bus power-system test cases. Credit for the underlying toolbox used for this project belongs to the
+> PSID.jl developers; please see **Citing** below.
+>
+> **The contribution of this repository is the use of PSID.jl to develop transient
+> and small-signal stability studies for the IEEE 39-bus and 3-bus test cases,
+> with step-by-step code included from scratch.**
+
 
 ## Built with PowerSimulationsDynamics.jl
 
