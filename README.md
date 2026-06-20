@@ -8,9 +8,9 @@ toolbox.
 > **Note** This repository does **not** reimplement a simulation
 > engine. It *uses* the PowerSimulationsDynamics.jl (PSID.jl) modeling and
 > simulation toolbox developed by the NREL Sienna team to build and study
-> specific IEEE 39-bus and 3-bus cases. All credit for the underlying Toolbox used to
-> develop these test cases belongs to the PSID.jl developers (see **Acknowledgements
-> & Citing** below).
+> specific IEEE 39-bus and 3-bus cases. Credit for the underlying Toolbox used to
+> develop these test cases belongs to the PSID.JL developers (see
+> **Citing** below).
 
 ## Built with PowerSimulationsDynamics.jl
 
@@ -30,14 +30,12 @@ If you use this repository, please cite the PSID.jl paper:
 
 ## Repository contents
 
-- **`3bus_TestCase/`** — a 3-bus full-EMT case (all transmission lines modeled
-  as dynamic branches) for voltage-dip and load-step studies.
+- **`3bus_TestCase/`** — a 3-bus balance dq0 EMT case
 - **`IEEE39Case_Simulations/`** — the IEEE 39-bus system partitioned into
   synchronous-generator (SG), grid-forming (GFM), and grid-following (GFL)
-  units, with fault / line-trip and load-change disturbances and full
-  CSV + figure exporters.
+  units, with fault / line-trip and load-change disturbances
 
-## Julia, VS Code, and PSID.jl setup
+## Julia, VSCode, and PSID.jl setup
 
 1. Install Julia: https://julialang.org/downloads/
 2. Install VS Code: https://code.visualstudio.com/download
@@ -95,7 +93,7 @@ julia --project=. 3bus_main_run.jl
 ```
 Outputs are written to `3bus_TestCase/3bus_plots/`.
 
-Disturbance type, bus partitions, fault location, and export options are set via
+Disturbance type, bus partitions, and fault location are set via
 the constants near the top of each `*_main_run.jl` file.
 
 ## Dynamic power-system simulation code  (IEEE 39-bus and 3-bus)
@@ -110,19 +108,14 @@ transmission lines are converted into `DynamicBranch` components, and disturbanc
 
 Each case is organised into three files:
 
-- a **MATPOWER case file** (`case*_matpower.jl` / `modified_*.m`) containing the
+- a **MATPOWER case file** (`case*_matpower.jl` ) containing the
   bus, generator, branch, and cost data;
-- a **parameter file** (`*_parameters.jl` / `ieee39_model_parameters.jl`)
-  storing solver settings, bus partitions, generator bases, damping values,
-  governor settings, inverter gains, PLL gains, and default maps — some defaults
-  are kept so buses can be switched between SG, GFM, and GFL models without
-  missing-parameter errors;
-- a **main run script** (`*_main_run.jl`) that writes the MATPOWER case, builds
-  the system, runs power flow, synchronises dynamic references, converts selected
-  loads and lines, attaches the dynamic models, applies the selected disturbance,
-  runs the DAE simulation, and saves CSV outputs.
+- a **parameter file** (`*_parameters.jl`)
+  storing solver settings, bus partitions, generator bases, damping gains, droop gains, 
+  governor settings, inverter gains, PLL gains,  etc.  
+- a **main run script** (`*_main_run.jl`) is the primary script to execute for each simulation case. The case file and parameter file scripts should be kept in the same folder
 
-The code supports load steps, 3 phase faultss. It uses Sundials IDA, an adaptive implicit DAE solver, for the
+The code supports load steps and fault /line-trip. It uses Sundials IDA, an adaptive implicit DAE solver, for the
 nonlinear time-domain (dq0 balanced EMT) transient-stability analysis.
 
 It also supports small-signal stability analysis (SSA): SSA linearizes the
