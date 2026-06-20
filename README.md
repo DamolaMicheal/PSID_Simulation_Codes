@@ -1,15 +1,15 @@
-# PSID Simulation Codes
+#PSID Simulation Codes
 
-EMT (electromagnetic-transient) simulation and dynamic state power-flow (DSPF)
-validation for inverter-dominated power systems (IEEE 39-bus and a 3-bus test
+Balanced dq0 EMT (electromagnetic-transient) simulation and Small Signal Stability Analysis 
+ for inverter-dominated power systems (IEEE 39-bus and a 3-bus test
 case), built on the open-source **Sienna / PowerSimulationsDynamics.jl**
 toolbox.
 
-> **Note on credit.** This repository does **not** reimplement a simulation
+> **Note** This repository does **not** reimplement a simulation
 > engine. It *uses* the PowerSimulationsDynamics.jl (PSID.jl) modeling and
 > simulation toolbox developed by the NREL Sienna team to build and study
-> specific IEEE 39-bus and 3-bus cases. All credit for the underlying dynamic
-> simulation framework belongs to the PSID.jl developers (see **Acknowledgements
+> specific IEEE 39-bus and 3-bus cases. All credit for the underlying Toolbox used to
+> develop these test cases belongs to the PSID.jl developers (see **Acknowledgements
 > & Citing** below).
 
 ## Built with PowerSimulationsDynamics.jl
@@ -70,13 +70,13 @@ If you use this repository, please cite the PSID.jl paper:
 7. Run a script — from the Julia REPL:
 
    ```julia
-   include("your_script_name.jl")
+   include("whatever_you_name_your_script.jl")
    ```
 
    or from the terminal:
 
    ```powershell
-   julia --project=. your_script_name.jl
+   julia --project=. whatever_you_name_your_sctipt.jl
    ```
 
 ### Running the included cases
@@ -98,13 +98,15 @@ Outputs are written to `3bus_TestCase/3bus_plots/`.
 Disturbance type, bus partitions, fault location, and export options are set via
 the constants near the top of each `*_main_run.jl` file.
 
-## Dynamic power-system simulation code summary (IEEE 39-bus and 3-bus)
+## Dynamic power-system simulation code  (IEEE 39-bus and 3-bus)
 
-This Julia code builds and simulates dynamic power-system models using
+This Julia code builds and simulates Balance dq0 EMT power-system models using
 `PowerSystems.jl`, `PowerSimulationsDynamics.jl`, `PowerFlows.jl`, and
-`Sundials.jl`. It starts from a MATPOWER case, solves the steady-state power
-flow, attaches SG, GFM, and GFL dynamic models, applies a disturbance, runs the
-nonlinear time-domain simulation, and exports the results for analysis.
+`Sundials.jl`. It starts from a MATPOWER case, which is imported into a `PowerSystems.jl` `System` object and solved to obtain the steady-state AC power-flow operating point. 
+The converged bus quantities are used to initialize the dynamic simulation. SG, GFM, and GFL dynamic models are then attached to their respective generation buses, 
+transmission lines are converted into `DynamicBranch` components, and disturbances are applied through PSID.jl `Perturbation` objects such as 
+`LoadChange`, `BranchTrip`. The time-domain simulation is then executed.
+.
 
 Each case is organised into three files:
 
@@ -120,24 +122,15 @@ Each case is organised into three files:
   loads and lines, attaches the dynamic models, applies the selected disturbance,
   runs the DAE simulation, and saves CSV outputs.
 
-The code supports load steps, bus faults, line faults, and fault clearing with
-line trips. It uses Sundials IDA, an adaptive implicit DAE solver, for the
+The code supports load steps, 3 phase faultss. It uses Sundials IDA, an adaptive implicit DAE solver, for the
 nonlinear time-domain (dq0 balanced EMT) transient-stability analysis.
 
-It also performs small-signal stability analysis (SSA): SSA linearizes the
+It also supports small-signal stability analysis (SSA): SSA linearizes the
 initialized operating point and checks eigenvalues to confirm local stability
-before the disturbance, while the nonlinear time-domain simulation shows the
-actual transient response after the event.
-
-The exported results include frequency, voltage, angle, terminal P/Q, SG
-mechanical power, GFM active power, GFL effective power reference, and network
-P/Q reconstruction data. These outputs are used for plotting, validation, DSPF
-comparison, and transient-response analysis.
+before the disturbance.
 
 ## Acknowledgements & citing
 
 This work is built on the **Sienna** modeling ecosystem and would not be possible
 without it. Please cite **PowerSimulationsDynamics.jl** (Lara et al., 2023, above)
-when using this repository. You may additionally cite this repository itself via
-the **"Cite this repository"** button on GitHub (generated from `CITATION.cff`),
-or via its Zenodo DOI once a release has been archived.
+when using this repository. To cite this repository itself, use the “Cite this repository” button on GitHub, generated from CITATION.cff, or use its Zenodo DOI once a release has been archived.
