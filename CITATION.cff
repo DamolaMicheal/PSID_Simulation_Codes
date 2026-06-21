@@ -1,0 +1,16 @@
+```yaml
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the metadata from this file."
+title: "PowerSimulationsDynamics.jl-Based Balanced dq0 EMT Simulations for Transient and Small-Signal Stability Studies of IEEE 39-Bus and 3-Bus Test Systems"
+type: software
+authors:
+  - family-names: "Ajeyemi"
+    given-names: "Damola"
+year: 2026
+version: "v1.0.0"
+doi: "10.5281/zenodo.20779024"
+url: "https://zenodo.org/records/20779024"
+repository-code: "https://github.com/DamolaMicheal/PSID_Simulation_Codes"
+abstract: "PowerSimulationsDynamics.jl-based balanced dq0 EMT simulations for transient and small-signal stability studies of IEEE 39-bus and 3-bus test systems."
+
+```
